@@ -369,3 +369,73 @@ blockquote {
     background: rgba(26, 26, 46, 0.5);
     font-style: italic;
 }
+
+/* Input field styling - especially for search */
+.widget input[type="text"],
+.widget input[type="search"],
+.search-form input[type="search"],
+.widget_search .search-field {
+    background-color: #232338;
+    color: #e6e6e6;
+    border: 1px solid #2c2c44;
+    padding: 8px 12px;
+    width: 100%;
+    border-radius: px;
+    font-family: 'Roboto', 'Segoe UI', system-ui, sans-serif;
+    font-size: 14px;
+}
+
+.widget input[type="text"]:focus,
+.widget input[type="search"]:focus,
+.search-form input[type="search"]:focus,
+.widget_search .search-field:focus {
+    outline: none;
+    border-color: #4ecca3;
+    box-shadow: 0 0 5px rgba(78, 204, 163, 0.5);
+}
+
+.widget_search .search-submit {
+    background-color: #1a1a2e;
+    color: #4ecca3;
+    border: 1px solid #4ecca3;
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.widget_search .search-submit:hover {
+    background-color: #4ecca3;
+    color: #141428;
+}
+
+/* Widget Styling */
+.widget-title, 
+.widgettitle,
+.sidebar h2,
+.sidebar h3,
+.sidebar h4 {
+    color: #a786df;
+    font-weight: 500;
+    font-family: 'Poppins', 'Montserrat', sans-serif;
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #2c2c44;
+	text-align:center;
+}
+
+/* Style for widget areas to ensure consistency */
+.widget {
+    margin-bottom: 30px;
+}
+
+/* Ensure links within widgets match the theme style */
+.widget a {
+    color: #4ecca3;
+    border-bottom: 1px solid transparent;
+}
+
+.widget a:hover {
+    color: #a786df;
+    border-bottom: 1px solid #a786df;
+}

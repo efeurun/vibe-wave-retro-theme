@@ -1,0 +1,371 @@
+/*
+Theme Name: vibe-wave-retro
+Author: efenigma.com
+Author URI: https://efenigma.com
+Description: A retro-styled WordPress theme with synthwave aesthetics - perfect for blogs with a nostalgic vibe
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: vibe-wave-retro
+*/
+
+/* 
+-----------------------------------------
+   Color Palette Definition
+-----------------------------------------
+   Background:  #1a1a2e (Dark blue-gray)
+   Text:        #e6e6e6 (Soft white)
+   Accent 1:    #e36588 (Muted rose)
+   Accent 2:    #4ecca3 (Teal)
+   Accent 3:    #a786df (Soft purple)
+   Borders:     #2c2c44 (Highlight border)
+   Alt BG:      #141428 (Darker areas)
+*/
+
+/* Global Styles */
+body {
+    font-family: 'Roboto', 'Segoe UI', system-ui, sans-serif;
+    background-color: #1a1a2e;
+    color: #e6e6e6;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: #4ecca3;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s ease-out; /* Smooth hover transitions */
+}
+
+a:hover {
+    color: #a786df;
+    border-bottom: 1px solid #a786df;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #e36588;
+    font-weight: 500;
+    font-family: 'Poppins', 'Montserrat', sans-serif;
+}
+
+/* Add a clearfix utility class */
+.clearfix::after {
+    content: "" !important;
+    display: table;
+    clear: both;
+    color: transparent; /* Make any content invisible */
+}
+
+/* Prevent any unwanted pseudo-elements */
+body::before, body::after,
+.site-container::before, .site-container::after {
+    content: none;
+}
+
+/* More aggressive reset for all pseudo-elements */
+*::before, *::after {
+    content: none !important;
+}
+
+/* Only restore pseudo-elements we explicitly want */
+.clearfix::after {
+    content: "" !important;
+    display: table;
+    clear: both;
+    color: transparent;
+}
+
+.site-header {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 2px solid #2c2c44;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+/* Add retro scanlines to header - subtle touch */
+.site-header:before {
+    content: "" !important; /* Override the general reset for this specific element */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        180deg, 
+        rgba(0, 0, 0, 0.03), 
+        rgba(0, 0, 0, 0.03) 1px, 
+        transparent 1px, 
+        transparent 2px
+    );
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.3;
+}
+
+.site-title {
+    font-size: 48px;
+    margin: 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 2;
+    text-shadow: 3px 3px 0px rgba(227, 101, 136, 0.3);
+}
+
+.site-description {
+    color: #a786df;
+    margin: 10px 0 0;
+    font-style: italic;
+    position: relative;
+    z-index: 2;
+}
+
+.content-area {
+    float: left;
+    width: 65%;
+    padding: 30px;
+    background-color: #141428;
+    box-sizing: border-box;
+    min-width: 280px;
+    max-width: 65%;
+    margin-right: 2%;
+    border-radius: 4px;
+}
+
+.sidebar {
+    float: right;
+    width: 33%;
+    background-color: #141428;
+    padding: 20px;
+    border-left: 2px solid #2c2c44;
+    min-width: 200px;
+    max-width: 30%;
+    align-self: stretch;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+.site-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #141428;
+    border: 3px solid #2c2c44;
+    box-shadow: 0 0 25px rgba(167, 134, 223, 0.2);
+    min-height: 100vh;
+    overflow: hidden;
+    padding: 0;
+    border-radius: 6px;
+}
+
+.site-container > * {
+    margin: 0; /* Remove margins from direct children */
+    padding: 20px; /* Add consistent padding to all direct children */
+}
+
+.main-content-wrapper {
+    width: 100%;
+    height: auto;
+    background-color: #141428;
+    padding: 0;
+    margin: 0;
+    overflow: hidden; /* Clear floats */
+    display: block; /* Remove flex display */
+}
+
+.main-content-wrapper:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.site-footer {
+    clear: both; /* Ensure footer clears floated elements */
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid #2c2c44;
+    margin-top: 20px;
+    color: #a1a1a1;
+    font-size: 0.9em;
+}
+
+/* Because we actually care about footer links */
+.site-footer a {
+    color: #4ecca3;
+    border-bottom: 0;
+}
+
+.site-footer a:hover {
+    color: #a786df;
+    border-bottom: 1px dotted;
+}
+
+/* Post Styling */
+.post {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #2c2c44;
+    background-color: #141428;
+}
+
+.post-title {
+    border-left: 4px solid #e36588;
+    padding-left: 15px;
+    transition: border-width 0.2s ease; /* Subtle interaction effect */
+}
+
+.post-title:hover {
+    border-left-width: 8px;
+}
+
+.post-meta {
+    color: #a786df;
+    font-size: 14px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Modern spacing */
+}
+
+/* Comments */
+.comments {
+    background-color: #141428;
+    padding: 20px;
+    margin-top: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    border-top: 1px dashed #2c2c44;
+}
+
+/* List Styling */
+ul {
+    list-style-type: disc; /* Change to desired style, e.g., circle, square, none */
+    color: #e6e6e6; /* Lighter text for better readability */
+    padding-left: 20px; /* Add proper padding for lists */
+}
+
+li {
+    margin-left: 20px; /* Adjust the spacing of the list items */
+    margin-bottom: 10px; /* Add vertical spacing between list items */
+    line-height: 1.5; /* Improve readability */
+}
+
+/* Ensure no list styling adds unwanted content */
+ul, ol {
+    list-style-position: inside;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-content-wrapper {
+        flex-direction: column;
+        gap: 0; /* Remove gap on mobile */
+    }
+    
+    .content-area, .sidebar {
+        flex: 1 0 100%;
+        padding: 20px; /* Consistent padding on mobile */
+        min-width: 100%; /* Ensure full width on mobile */
+        max-width: 100%; /* Reset max-width for mobile */
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .sidebar {
+        border-left: none;
+        border-top: 2px solid #2c2c44;
+        margin-top: 20px;
+    }
+    
+    .site-title {
+        font-size: 36px; /* Smaller title for mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .site-container {
+        border-width: 2px;
+        width: 98%;
+        padding: 0; /* Ensure no padding to prevent light background showing */
+    }
+    
+    .site-title {
+        font-size: 28px; /* Even smaller title for small phones */
+    }
+    
+    .post-title {
+        font-size: 20px;
+    }
+    
+    .content-area, .sidebar {
+        padding: 15px; /* Reduce padding on very small screens */
+    }
+}
+
+/* Ensure the page works on all devices */
+@media (min-width: 1401px) {
+    .site-container {
+        max-width: 80%;
+        border-width: 4px;
+        padding: 0; /* Ensure no padding to prevent light background showing */
+    }
+    
+    .content-area {
+        padding: 35px; /* More generous padding on large screens */
+    }
+}
+
+/* Add a general wrapper for inner content */
+.inner-content {
+    background-color: #141428;
+}
+
+/* Reset for WordPress-generated content */
+.wp-element::before, 
+.wp-element::after,
+.wp-block::before,
+.wp-block::after {
+    content: none !important;
+}
+
+/* Special Sauce - Custom button styles for that extra retro feel */
+.retro-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #1a1a2e;
+    color: #e36588;
+    border: 2px solid #e36588;
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.retro-btn:hover {
+    background-color: #e36588;
+    color: #141428;
+    box-shadow: 0 0 15px rgba(227, 101, 136, 0.5);
+}
+
+/* Subtle gradient for special elements - use sparingly */
+.gradient-text {
+    background: linear-gradient(90deg, #e36588, #a786df);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+/* For blockquotes - stylish and on-theme */
+blockquote {
+    border-left: 4px solid #4ecca3;
+    padding: 10px 20px;
+    margin: 20px 0;
+    background: rgba(26, 26, 46, 0.5);
+    font-style: italic;
+}

@@ -61,23 +61,16 @@ h1, h2, h3, h4, h5, h6 {
     color: transparent; /* Make any content invisible */
 }
 
-/* Prevent any unwanted pseudo-elements */
-body::before, body::after,
-.site-container::before, .site-container::after {
-    content: none;
-}
-
 /* More aggressive reset for all pseudo-elements */
 *::before, *::after {
     content: none !important;
 }
 
 /* Only restore pseudo-elements we explicitly want */
-.clearfix::after {
+.clearfix::after,
+.site-header:before,
+.post-thumbnail::after {
     content: "" !important;
-    display: table;
-    clear: both;
-    color: transparent;
 }
 
 .site-header {
@@ -90,7 +83,6 @@ body::before, body::after,
 
 /* Add retro scanlines to header - subtle touch */
 .site-header:before {
-    content: "" !important; /* Override the general reset for this specific element */
     position: absolute;
     top: 0;
     left: 0;
@@ -133,6 +125,24 @@ body::before, body::after,
     z-index: 2;
 }
 
+/* Layout structure */
+.site-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #141428;
+    border: 3px solid #2c2c44;
+    box-shadow: 0 0 25px rgba(167, 134, 223, 0.2);
+    min-height: 100vh;
+    overflow: hidden;
+    padding: 0;
+    border-radius: 6px;
+}
+
+.site-container > * {
+    margin: 0;
+    padding: 20px;
+}
+
 .content-area {
     float: left;
     width: 65%;
@@ -158,23 +168,6 @@ body::before, body::after,
     border-radius: 4px;
 }
 
-.site-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    background-color: #141428;
-    border: 3px solid #2c2c44;
-    box-shadow: 0 0 25px rgba(167, 134, 223, 0.2);
-    min-height: 100vh;
-    overflow: hidden;
-    padding: 0;
-    border-radius: 6px;
-}
-
-.site-container > * {
-    margin: 0; /* Remove margins from direct children */
-    padding: 20px; /* Add consistent padding to all direct children */
-}
-
 .main-content-wrapper {
     width: 100%;
     height: auto;
@@ -182,7 +175,7 @@ body::before, body::after,
     padding: 0;
     margin: 0;
     overflow: hidden; /* Clear floats */
-    display: block; /* Remove flex display */
+    display: block;
 }
 
 .main-content-wrapper:after {
@@ -192,7 +185,7 @@ body::before, body::after,
 }
 
 .site-footer {
-    clear: both; /* Ensure footer clears floated elements */
+    clear: both;
     padding: 20px;
     text-align: center;
     border-top: 1px solid #2c2c44;
@@ -201,7 +194,6 @@ body::before, body::after,
     font-size: 0.9em;
 }
 
-/* Because we actually care about footer links */
 .site-footer a {
     color: #4ecca3;
     border-bottom: 0;
@@ -222,29 +214,31 @@ body::before, body::after,
     flex-direction: column;
 }
 
-/* Add proper ordering to post elements */
+/* Post element ordering */
 .post-title, .entry-title {
     border-left: 4px solid #e36588;
     padding-left: 15px;
-    transition: border-width 0.2s ease; /* Subtle interaction effect */
+    transition: border-width 0.2s ease;
     order: 1; /* Make title appear first */
+    margin-bottom: 8px; /* Reduced from default to close gap with post meta */
 }
 
 .post-meta {
     color: #a786df;
     font-size: 14px;
-    margin-bottom: 20px;
+    margin-bottom: 15px; /* Reduced from 20px to tighten spacing */
+    margin-top: 0; /* Explicitly set margin-top */
     display: flex;
     flex-wrap: wrap;
-    gap: 10px; /* Modern spacing */
-    order: 2; /* Make meta appear after title */
+    gap: 10px;
+    order: 2; /* Meta after title */
 }
 
 .post-content, .entry-content {
-    order: 3; /* Ensure content comes after meta and before thumbnail */
+    order: 3; /* Content after meta */
 }
 
-/* Post Thumbnail/Featured Image - consolidated styles with proper ordering */
+/* Post Thumbnail/Featured Image - consolidated styles */
 .post-thumbnail {
     width: 100%;
     margin-bottom: 20px;
@@ -252,69 +246,19 @@ body::before, body::after,
     border-radius: 4px;
     border: 2px solid #2c2c44;
     position: relative;
-    display: block; /* Ensure it's visible */
-    max-height: 250px; /* Control height for homepage */
-    order: 4; /* Make thumbnail appear after content */
-}
-
-/* Add specific style for the read more link to ensure it stays at the bottom */
-.more-link, 
-.read-more, 
-a.more-link, 
-a.read-more,
-.retro-btn,
-.post .more-link,
-.post-content .more-link {
-    order: 5;
-    margin-top: 15px;
-    display: inline-block;
-    align-self: flex-start;
-}
-
-/* Ensure featured images display on archives/homepages */
-.blog .post-thumbnail,
-.archive .post-thumbnail,
-.home .post-thumbnail {
-    display: block !important;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    order: 4; /* Consistent ordering - after content */
+    display: block;
+    order: 4; /* Thumbnail after content */
+    /* Removed fixed max-height that was causing cropping */
 }
 
 .post-thumbnail img {
     width: 100%;
-    height: auto;
+    height: auto; /* Auto height to maintain aspect ratio */
     display: block;
     transition: transform 0.3s ease;
-    object-fit: cover; /* Prevent image distortion */
-    min-height: 150px; /* Minimum height to show on homepage */
-}
-
-/* Ensure featured images display on archives/homepages */
-.blog .post-thumbnail,
-.archive .post-thumbnail,
-.home .post-thumbnail {
-    display: block !important;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    order: 3; /* Consistent ordering */
-}
-
-/* Post Thumbnail/Featured Image */
-.post-thumbnail {
-    width: 100%;
-    margin-bottom: 20px;
-    overflow: hidden;
-    border-radius: 4px;
-    border: 2px solid #2c2c44;
-    position: relative;
-}
-
-.post-thumbnail img {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: transform 0.3s ease;
+    object-fit: contain; /* Changed from 'cover' to 'contain' to show full image */
+    min-height: 150px; /* Minimum height still applies */
+    max-height: 400px; /* Maximum height to prevent overly tall images */
 }
 
 .post-thumbnail:hover img {
@@ -322,7 +266,6 @@ a.read-more,
 }
 
 .post-thumbnail::after {
-    content: "" !important;
     position: absolute;
     top: 0;
     left: 0;
@@ -334,28 +277,55 @@ a.read-more,
     pointer-events: none;
 }
 
-/* For posts without images */
-.post:not(:has(.post-thumbnail)) {
-    padding-top: 20px;
+/* Single post view - show full image */
+.single .post-thumbnail {
+    max-height: none; /* No height restriction on single post view */
 }
 
-.post-title {
-    border-left: 4px solid #e36588;
-    padding-left: 15px;
-    transition: border-width 0.2s ease; /* Subtle interaction effect */
+.single .post-thumbnail img {
+    object-fit: contain;
+    max-height: 600px; /* Larger but still limited for very tall images */
+}
+
+/* Read more link - improved styling */
+.more-link, 
+.read-more, 
+.retro-btn,
+.post .more-link,
+.post-content .more-link {
+    order: 5;
+    margin-top: 15px;
+    display: inline-block;
+    align-self: flex-start;
+    padding: 8px 16px;
+    background-color: #141428; /* Darker background to match theme */
+    color: #4ecca3; /* Changed to teal which is more balanced with the theme */
+    border: 2px solid #4ecca3; /* Border color matched to text */
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    font-size: 14px; /* Better size for buttons */
+    border-radius: 3px; /* Slight rounding */
+}
+
+.more-link:hover, 
+.read-more:hover, 
+.retro-btn:hover,
+.post .more-link:hover,
+.post-content .more-link:hover {
+    background-color: #4ecca3;
+    color: #141428;
+    box-shadow: 0 0 10px rgba(78, 204, 163, 0.5);
+    border-bottom: 2px solid #4ecca3; /* Override the general a:hover border style */
+    text-decoration: none; /* Ensure no underline */
 }
 
 .post-title:hover {
     border-left-width: 8px;
-}
-
-.post-meta {
-    color: #a786df;
-    font-size: 14px;
-    margin-bottom: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px; /* Modern spacing */
 }
 
 /* Comments */
@@ -370,128 +340,28 @@ a.read-more,
 
 /* List Styling */
 ul {
-    list-style-type: disc; /* Change to desired style, e.g., circle, square, none */
-    color: #e6e6e6; /* Lighter text for better readability */
-    padding-left: 20px; /* Add proper padding for lists */
+    list-style-type: disc;
+    color: #e6e6e6;
+    padding-left: 20px;
 }
 
 li {
-    margin-left: 20px; /* Adjust the spacing of the list items */
-    margin-bottom: 10px; /* Add vertical spacing between list items */
-    line-height: 1.5; /* Improve readability */
+    margin-left: 20px;
+    margin-bottom: 10px;
+    line-height: 1.5;
 }
 
-/* Ensure no list styling adds unwanted content */
 ul, ol {
     list-style-position: inside;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .main-content-wrapper {
-        flex-direction: column;
-        gap: 0; /* Remove gap on mobile */
-    }
-    
-    .content-area, .sidebar {
-        flex: 1 0 100%;
-        padding: 20px; /* Consistent padding on mobile */
-        min-width: 100%; /* Ensure full width on mobile */
-        max-width: 100%; /* Reset max-width for mobile */
-        width: 100%;
-        box-sizing: border-box;
-    }
-    
-    .sidebar {
-        border-left: none;
-        border-top: 2px solid #2c2c44;
-        margin-top: 20px;
-    }
-    
-    .site-title {
-        font-size: 36px; /* Smaller title for mobile */
-    }
-    
-    .post-thumbnail {
-        border-width: 1px;
-        max-height: 200px;
-    }
-}
-
-@media (max-width: 480px) {
-    .site-container {
-        border-width: 2px;
-        width: 98%;
-        padding: 0; /* Ensure no padding to prevent light background showing */
-    }
-    
-    .site-title {
-        font-size: 28px; /* Even smaller title for small phones */
-    }
-    
-    .post-title {
-        font-size: 20px;
-    }
-    
-    .content-area, .sidebar {
-        padding: 15px; /* Reduce padding on very small screens */
-    }
-    
-    .post-thumbnail {
-        margin-bottom: 15px;
-        max-height: 180px;
-    }
-}
-
-/* Ensure the page works on all devices */
-@media (min-width: 1401px) {
-    .site-container {
-        max-width: 80%;
-        border-width: 4px;
-        padding: 0; /* Ensure no padding to prevent light background showing */
-    }
-    
-    .content-area {
-        padding: 35px; /* More generous padding on large screens */
-    }
-}
-
-/* Add a general wrapper for inner content */
-.inner-content {
-    background-color: #141428;
-}
-
-/* Reset for WordPress-generated content */
-.wp-element::before, 
-.wp-element::after,
-.wp-block::before,
-.wp-block::after {
-    content: none !important;
-}
-
-/* Special Sauce - Custom button styles for that extra retro feel */
+/* Special Sauce - Custom button styles for that retro feel */
 .retro-btn {
-    display: inline-block;
-    padding: 8px 16px;
-    background-color: #1a1a2e;
-    color: #e36588;
-    border: 2px solid #e36588;
-    font-family: 'Poppins', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
+    /* Remove duplicate properties - they're now defined in the consolidated block above */
+    /* Only keep any unique properties not defined in the consolidated style above */
 }
 
-.retro-btn:hover {
-    background-color: #e36588;
-    color: #141428;
-    box-shadow: 0 0 15px rgba(227, 101, 136, 0.5);
-}
-
-/* Subtle gradient for special elements - use sparingly */
+/* Gradient text effect */
 .gradient-text {
     background: linear-gradient(90deg, #e36588, #a786df);
     -webkit-background-clip: text;
@@ -500,7 +370,7 @@ ul, ol {
     color: transparent;
 }
 
-/* For blockquotes - stylish and on-theme */
+/* Blockquotes styling */
 blockquote {
     border-left: 4px solid #4ecca3;
     padding: 10px 20px;
@@ -519,7 +389,7 @@ blockquote {
     border: 1px solid #2c2c44;
     padding: 8px 12px;
     width: 100%;
-    border-radius: px;
+    border-radius: 4px; /* Fixed missing value */
     font-family: 'Roboto', 'Segoe UI', system-ui, sans-serif;
     font-size: 14px;
 }
@@ -560,15 +430,13 @@ blockquote {
     margin-bottom: 15px;
     padding-bottom: 10px;
     border-bottom: 1px solid #2c2c44;
-	text-align:center;
+    text-align: center;
 }
 
-/* Style for widget areas to ensure consistency */
 .widget {
     margin-bottom: 30px;
 }
 
-/* Ensure links within widgets match the theme style */
 .widget a {
     color: #4ecca3;
     border-bottom: 1px solid transparent;
@@ -577,4 +445,76 @@ blockquote {
 .widget a:hover {
     color: #a786df;
     border-bottom: 1px solid #a786df;
+}
+
+/* Responsive styles - consolidated */
+@media (max-width: 768px) {
+    .content-area, .sidebar {
+        float: none;
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    
+    .sidebar {
+        border-left: none;
+        border-top: 2px solid #2c2c44;
+        margin-top: 20px;
+    }
+    
+    .site-title {
+        font-size: 36px;
+    }
+    
+    .post-thumbnail {
+        border-width: 1px;
+        /* Removed max-height constraint */
+    }
+    
+    .post-thumbnail img {
+        max-height: 350px; /* Slightly reduced for medium screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .site-container {
+        border-width: 2px;
+        width: 98%;
+        padding: 0;
+    }
+    
+    .site-title {
+        font-size: 28px;
+    }
+    
+    .post-title {
+        font-size: 20px;
+    }
+    
+    .content-area, .sidebar {
+        padding: 15px;
+    }
+    
+    .post-thumbnail {
+        margin-bottom: 15px;
+        /* Removed max-height constraint */
+    }
+    
+    .post-thumbnail img {
+        max-height: 250px; /* Further reduced for small screens */
+    }
+}
+
+@media (min-width: 1401px) {
+    .site-container {
+        max-width: 80%;
+        border-width: 4px;
+        padding: 0;
+    }
+    
+    .content-area {
+        padding: 35px;
+    }
 }

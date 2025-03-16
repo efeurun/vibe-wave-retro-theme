@@ -24,7 +24,7 @@ Text Domain: vibe-wave-retro
 
 /* Global Styles */
 body {
-    font-family: 'Roboto', 'Segoe UI', system-ui, sans-serif;
+    font-family: 'Space Mono', 'Courier New', monospace;
     background-color: #1a1a2e;
     color: #e6e6e6;
     line-height: 1.6;
@@ -34,6 +34,7 @@ body {
 
 /* Import the retro fonts */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=VT323&family=Space+Mono:wght@400;700&display=swap');
 
 a {
     color: #4ecca3;
@@ -50,7 +51,7 @@ a:hover {
 h1, h2, h3, h4, h5, h6 {
     color: #e36588;
     font-weight: 500;
-    font-family: 'Poppins', 'Montserrat', sans-serif;
+    font-family: 'Audiowide', 'Orbitron', cursive;
 }
 
 /* Add a clearfix utility class */
@@ -101,16 +102,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .site-title {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Audiowide', 'Orbitron', sans-serif;
     font-size: 48px;
     margin: 0;
     letter-spacing: 4px;
-    text-transform: uppercase;
+    text-transform: lowercase;
     position: relative;
     z-index: 2;
     text-shadow: 3px 3px 0px rgba(227, 101, 136, 0.5), 
                  5px 5px 10px rgba(167, 134, 223, 0.3);
-    background: linear-gradient(90deg, #e36588, #a786df);
+    background: linear-gradient(90deg, #ff2a6d, #05d9e8);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -118,11 +119,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .site-description {
-    color: #a786df;
+    color: #4ecca3;
     margin: 10px 0 0;
     font-style: italic;
     position: relative;
     z-index: 2;
+    font-family: 'VT323', monospace;
+    font-size: 1.2em;
 }
 
 /* Layout structure */
@@ -336,6 +339,109 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     box-sizing: border-box;
     border-top: 1px dashed #2c2c44;
+}
+
+.comment-respond,
+.comment-form,
+#comments,
+.comment-list,
+.comment-body {
+    background-color: #141428;
+    color: #e6e6e6;
+}
+
+.comment-form input[type="text"],
+.comment-form input[type="email"],
+.comment-form input[type="url"],
+.comment-form textarea {
+    background-color: #1a1a2e;
+    color: #e6e6e6;
+    border: 1px solid #2c2c44;
+    padding: 10px;
+    width: 100%;
+    border-radius: 4px;
+    font-family: 'Space Mono', monospace;
+}
+
+.comment-form input[type="text"]:focus,
+.comment-form input[type="email"]:focus,
+.comment-form input[type="url"]:focus,
+.comment-form textarea:focus {
+    border-color: #4ecca3;
+    outline: none;
+    box-shadow: 0 0 5px rgba(78, 204, 163, 0.5);
+}
+
+.comment-form label {
+    color: #a786df;
+    display: block;
+    margin-bottom: 5px;
+    font-family: 'VT323', monospace;
+    font-size: 1.1em;
+}
+
+.comment-form .submit,
+.form-submit .submit {
+    background-color: #141428;
+    color: #4ecca3;
+    border: 2px solid #4ecca3;
+    padding: 8px 16px;
+    font-family: 'Audiowide', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.comment-form .submit:hover,
+.form-submit .submit:hover {
+    background-color: #4ecca3;
+    color: #141428;
+    box-shadow: 0 0 10px rgba(78, 204, 163, 0.5);
+}
+
+.comment-list {
+    list-style: none;
+    padding: 0;
+}
+
+.comment-author .avatar {
+    border: 2px solid #4ecca3;
+    border-radius: 50%;
+}
+
+.comment-author .fn {
+    color: #e36588;
+    font-family: 'Audiowide', sans-serif;
+    font-style: normal;
+}
+
+.comment-metadata a {
+    color: #a786df;
+    font-size: 0.85em;
+}
+
+.comment-content {
+    border-left: 3px solid #2c2c44;
+    padding-left: 15px;
+    margin: 10px 0 10px 20px;
+}
+
+.reply .comment-reply-link {
+    display: inline-block;
+    background-color: #1a1a2e;
+    color: #4ecca3;
+    border: 1px solid #4ecca3;
+    padding: 3px 10px;
+    font-size: 12px;
+    border-radius: 3px;
+    transition: all 0.3s;
+}
+
+.reply .comment-reply-link:hover {
+    background-color: #4ecca3;
+    color: #1a1a2e;
+    border-color: #4ecca3;
 }
 
 /* List Styling */

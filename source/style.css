@@ -51,7 +51,7 @@ a:hover {
 h1, h2, h3, h4, h5, h6 {
     color: #e36588;
     font-weight: 500;
-    font-family: 'Audiowide', 'Orbitron', cursive;
+    font-family: 'Audiowide', 'Orbitron';
 }
 
 /* Add a clearfix utility class */
@@ -484,6 +484,23 @@ blockquote {
     background: rgba(26, 26, 46, 0.5);
     font-style: italic;
 }
+
+body .jetpack-subscribe-modal__modal-content {
+    background-color: #19091a !important;
+}
+
+
+.jetpack-subscribe-modal__modal-content p.has-text-align-center {
+  display: none !important;
+}
+
+/* 1) Hide the original text */
+.jetpack-subscribe-modal__modal-content .wp-block-heading.has-text-align-center {
+  color: #4ecca3;     /* Makes the text invisible */
+	padding-bottom:20px;
+}
+
+
 
 /* Input field styling - especially for search */
 .widget input[type="text"],
